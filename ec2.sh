@@ -39,7 +39,7 @@ VOLUME_IDS=$(aws ec2 describe-instances \
 aws ec2 create-tags --resources $NETWORK_INTERFACE_ID $VOLUME_IDS --tags Key=Name,Value=$EC2_NAME
 
 ## 動作確認
-PUBLIC_IP_ADDRESS=$(aws ec2 describe-instances --instance-id $INSTANCE_ID \
-    --query "Reservations[*].Instances[*].PublicIpAddress" \
-    --output text) && echo $PUBLIC_IP_ADDRESS
-curl http://$PUBLIC_IP_ADDRESS
+# PUBLIC_IP_ADDRESS=$(aws ec2 describe-instances --instance-id $INSTANCE_ID \
+#     --query "Reservations[*].Instances[*].PublicIpAddress" \
+#     --output text) && echo $PUBLIC_IP_ADDRESS
+# curl http://$PUBLIC_IP_ADDRESS

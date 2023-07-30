@@ -1,0 +1,17 @@
+{
+    "Changes": [
+        {
+            "Action": "CREATE",
+            "ResourceRecordSet": {
+                "Name": "_86036e3edeb5884abb69d803b9469d07.fukuoka-developers.com.",
+                "Type": "CNAME",
+                "TTL": 300,
+                "ResourceRecords": [
+                    {
+                        "Value": "_b193c932a79a28762d2ed87b11388d74.zxstmrtdtf.acm-validations.aws."
+                    }
+                ]
+            }
+        }
+    ]
+}

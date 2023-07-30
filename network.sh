@@ -23,9 +23,16 @@ aws ec2 attach-internet-gateway \
 # Public Subnet
 PUBLIC_SUBNET_ID_1A=$(aws ec2 create-subnet \
     --vpc-id $VPC_ID \
-    --cidr-block 10.0.12.0/24 \
+    --cidr-block 10.0.11.0/24 \
     --availability-zone ap-northeast-1a \
     --tag-specifications "ResourceType=subnet, Tags=[{Key=Name, Value=${PREFIX}-public-subnet-1a}]" \
+    --query "Subnet.SubnetId" --output text)
+
+PUBLIC_SUBNET_ID_1C=$(aws ec2 create-subnet \
+    --vpc-id $VPC_ID \
+    --cidr-block 10.0.12.0/24 \
+    --availability-zone ap-northeast-1c \
+    --tag-specifications "ResourceType=subnet, Tags=[{Key=Name, Value=${PREFIX}-public-subnet-1c}]" \
     --query "Subnet.SubnetId" --output text)
 
 # Root Table
