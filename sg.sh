@@ -31,18 +31,18 @@ EC2_SECURITY_GROUP_ID=$(aws ec2 create-security-group \
     --tag-specifications "ResourceType=security-group,Tags=[{Key=Name,Value=${PREFIX}-ec2-sg}]" \
     --query "GroupId" --output text) && echo $EC2_SECURITY_GROUP_ID
 
-# IP=$(curl -s https://api.ipify.org)
-# aws ec2 authorize-security-group-ingress \
-#     --group-id $EC2_SECURITY_GROUP_ID \
-#     --protocol tcp \
-#     --port 22 \
-#     --cidr ${IP}/32
+IP=$(curl -s https://api.ipify.org)
+aws ec2 authorize-security-group-ingress \
+    --group-id $EC2_SECURITY_GROUP_ID \
+    --protocol tcp \
+    --port 22 \
+    --cidr ${IP}/32
 
-# aws ec2 authorize-security-group-ingress \
-#     --group-id $EC2_SECURITY_GROUP_ID \
-#     --protocol tcp \
-#     --port 80 \
-#     --cidr ${IP}/32
+aws ec2 authorize-security-group-ingress \
+    --group-id $EC2_SECURITY_GROUP_ID \
+    --protocol tcp \
+    --port 80 \
+    --cidr ${IP}/32
 
 aws ec2 authorize-security-group-ingress \
     --group-id $EC2_SECURITY_GROUP_ID \

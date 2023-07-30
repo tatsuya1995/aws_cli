@@ -9,7 +9,7 @@ aws ec2 create-vpc \
     --tag-specifications "ResourceType=vpc, Tags=[{Key=Name, Value=${PREFIX}-vpc}]"
 
 VPC_ID=$(aws ec2 describe-vpcs --filters Name=tag:Name,Values=${PREFIX}-vpc \
-   --query "Vpcs[*].VpcId" --output text)
+   --query "Vpcs[*].VpcId" --output text) && echo $VPC_ID
 
 # IGW
 INTERNET_GATEWAY_ID=$(aws ec2 create-internet-gateway \
