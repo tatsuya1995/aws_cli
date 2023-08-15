@@ -7,6 +7,11 @@ INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id) && ec
 EC2_NAME=$(aws ec2 describe-instances --region $AWS_REGION --instance-id $INSTANCE_ID \
   --query 'Reservations[*].Instances[*].Tags[?Key==`Name`].Value' --output text) && echo $EC2_NAME
 
+# Apachのインストールと起動
+sudo yum install httpd -y
+sudo systemctl start httpd.service
+sudo systemctl enable httpd.service
+
 # Install nginx if not installed
 nginx -v
 if [ "$?" -ne 0 ]; then
@@ -33,6 +38,29 @@ if [ "$?" -ne 0 ]; then
   # install mysql client
   sudo yum install -y mysql-community-client
 fi
+
+  # php8.0を有効化
+  $ sudo amazon-linux-extras enable php8.0
+
+  # php8.0をインストール
+  $ sudo amazon-linux-extras install -y php8.0
+
+  # laravelで必要なモジュールをインストール
+  $ sudo yum install -y php-cli php-pdo php-fpm php-mysqlnd php-mbstring php-xml php-bcmath
+
+  # metadataを削除
+  $ yum clean metadata
+
+  # 自動起動設定
+  sudo systemctl enable php-fpm
+
+  sudo curl -sS https://getcomposer.org/installer | php　# コンポーザーのインストール
+  sudo chown root:root composer.phar 
+  sudo mv composer.phar /usr/bin/composer # パスを通す
+  composer # インストールされたか確認
+
+  # install git 
+  sudo yum install -y git
 
 # Create index.html
 echo "<h1>${EC2_NAME}</h1>" >index.html

@@ -10,7 +10,7 @@ HOSTED_ZONE_ID=$(aws route53 create-hosted-zone \
 
 # ACM 
 CERTIFICATE_ARN=$(aws acm request-certificate \
-    --domain-name ${DOMAIN} \
+    --domain-name $DOMAIN \
     --validation-method DNS \
     --query "CertificateArn" --output text) && echo $CERTIFICATE_ARN
 
