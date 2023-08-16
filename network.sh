@@ -28,12 +28,12 @@ PUBLIC_SUBNET_ID_1A=$(aws ec2 create-subnet \
     --tag-specifications "ResourceType=subnet, Tags=[{Key=Name, Value=${PREFIX}-public-subnet-1a}]" \
     --query "Subnet.SubnetId" --output text)
 
-PUBLIC_SUBNET_ID_1C=$(aws ec2 create-subnet \
-    --vpc-id $VPC_ID \
-    --cidr-block 10.0.12.0/24 \
-    --availability-zone ap-northeast-1c \
-    --tag-specifications "ResourceType=subnet, Tags=[{Key=Name, Value=${PREFIX}-public-subnet-1c}]" \
-    --query "Subnet.SubnetId" --output text)
+# PUBLIC_SUBNET_ID_1C=$(aws ec2 create-subnet \
+#     --vpc-id $VPC_ID \
+#     --cidr-block 10.0.12.0/24 \
+#     --availability-zone ap-northeast-1c \
+#     --tag-specifications "ResourceType=subnet, Tags=[{Key=Name, Value=${PREFIX}-public-subnet-1c}]" \
+#     --query "Subnet.SubnetId" --output text)
 
 # Root Table
 ROUTE_TABLE_ID=$(aws ec2 create-route-table \

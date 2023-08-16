@@ -3,26 +3,6 @@
 PREFIX="fukuoka"
 VPC_ID=$(aws ec2 describe-vpcs --filters Name=tag:Name,Values=${PREFIX}-vpc --query "Vpcs[*].VpcId" --output text) && echo $VPC_ID
 
-# ELB
-ELB_SECURITY_GROUP_ID=$(aws ec2 create-security-group \
-    --group-name ${PREFIX}-elb-sg \
-    --description ${PREFIX}-elb-sg \
-    --vpc-id $VPC_ID \
-    --tag-specifications "ResourceType=security-group,Tags=[{Key=Name,Value=${PREFIX}-elb-sg}]" \
-    --query "GroupId" --output text) && echo $ELB_SECURITY_GROUP_ID
-
-aws ec2 authorize-security-group-ingress \
-    --group-id $ELB_SECURITY_GROUP_ID \
-    --protocol tcp \
-    --port 80 \
-    --cidr 0.0.0.0/0
-
-aws ec2 authorize-security-group-ingress \
-    --group-id $ELB_SECURITY_GROUP_ID \
-    --protocol tcp \
-    --port 443 \
-    --cidr 0.0.0.0/0
-
 # EC2
 EC2_SECURITY_GROUP_ID=$(aws ec2 create-security-group \
     --group-name ${PREFIX}-ec2-sg \
@@ -42,13 +22,7 @@ aws ec2 authorize-security-group-ingress \
     --group-id $EC2_SECURITY_GROUP_ID \
     --protocol tcp \
     --port 80 \
-    --cidr ${IP}/32
-
-aws ec2 authorize-security-group-ingress \
-    --group-id $EC2_SECURITY_GROUP_ID \
-    --protocol tcp \
-    --port 80 \
-    --source-group $ELB_SECURITY_GROUP_ID
+    --cidr 0.0.0.0/0
 
 # RDS
 RDS_SECURITY_GROUP_ID=$(aws ec2 create-security-group \
